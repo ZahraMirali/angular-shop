@@ -1,0 +1,39 @@
+<div class="container-fluid ">
+
+    <div class="row scrolly d-flex align-items-center justify-content-center g-2" style="height: 70vh;">
+
+        <div *ngIf="fetchingData;else fetched" class="d-flex align-items-center justify-content-center">
+
+            <div class="spinner-grow text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+
+        </div>
+
+        <ng-template #fetched>
+
+
+            <app-template-item class=" col-7 col-sm-5  col-md-4 col-lg mb-15 " [@templated]="stated[i]"
+                *ngFor="let item of templates;index as i" [template]="item" (mouseenter)="onMouseOver(i)"
+                (mouseleave)="onMouseOut(i)"></app-template-item>
+        </ng-template>
+
+    </div>
+
+    <div class="row ">
+
+        <div class="col-md-6 offset-3 d-flex align-items-center justify-content-center mb-10">
+
+            <div class="glassbox d-flex align-items-center justify-content-around">
+
+                <button type="button" class="btn btn-light">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Previous&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </button>
+                <h5> {{selectedIndex}}&nbsp;&nbsp; / &nbsp;{{total}}</h5>
+                <button type="button" class="btn btn-light" (click)="onRight()">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Next
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                </button>
+            </div>
+        </div>
+    </div>

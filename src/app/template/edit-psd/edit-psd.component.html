@@ -1,0 +1,65 @@
+<div class="container-fluid ">
+
+    <div class="row scrolly d-flex  g-2" style="height: 70vh;">
+        <div class="col-md-6 offset-md-2">
+
+
+            <div class="row d-flex g-3">
+                <h3>PSD File</h3>
+                <div class="d-flex">
+
+                    <input class="form-control " type="file" (change)="onChangePsd($event)">
+
+                    <button (click)="onUploadPsd()" class="btn  btn-primary" style="margin-left: 2px;">
+                        Upload
+                    </button>
+                </div>
+            </div>
+
+            <hr>
+            <div class="container  jumbotron text-success" *ngIf="templateData.psdFileMetadata">
+                <h6>file with id {{templateData.psdFileMetadata.id}} saved successfully</h6>
+            </div>
+
+            <div class="row d-flex " style="margin-top: 5%;">
+                <h3>Image File</h3>
+                <div class="d-flex">
+
+                    <input class="form-control " type="file" (change)="onChangeImage($event)">
+
+                    <button (click)="onUploadImage()" class="btn  btn-primary" style="margin-left: 2px;">
+                        Upload
+                    </button>
+                </div>
+            </div>
+
+            <hr>
+            <div class="container  jumbotron text-success" *ngIf="templateData.imageFileMetadata">
+                <h6>file with id {{templateData.imageFileMetadata.id}} saved successfully</h6>
+            </div>
+
+            <div class="row d-flex " style="margin-top: 5%;">
+                <h4>name</h4>
+                <div class="d-flex">
+
+                    <input class="form-control " type="text" [(ngModel)]="templateData.name">
+
+                </div>
+            </div>
+
+            <div class="row d-flex " style="margin-top: 5%;">
+                <h4>description</h4>
+                <div class="d-flex">
+
+                    <input class="form-control " type="text" [(ngModel)]="templateData.description">
+
+                </div>
+            </div>
+
+            <div class=" d-flex justify-content-end" style="margin-top:5%;">
+                <button class="btn btn-success btn-lg " (click)="openPreview()">Preview & Save</button>
+            </div>
+
+        </div>
+    </div>
+</div>

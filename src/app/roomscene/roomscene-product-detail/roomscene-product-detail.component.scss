@@ -1,0 +1,14 @@
+.glassbox {
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+    border-radius: 4px;
+    background-color: rgba(197, 197, 197, 0.27);
+  
+    box-shadow:  0px 25px 20px -20px rgba(157,210,217,0.85);
+    -webkit-box-shadow: rgb(211, 211, 177) 0px 0px 10px;;
+    -moz-box-shadow: 0px 25px 20px -20px rgba(157,210,217,0.85);
+    
+
+    backdrop-filter: blur(5px);
+  }
+
+  .bs-shadow {}

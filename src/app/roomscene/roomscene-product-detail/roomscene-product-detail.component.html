@@ -1,0 +1,73 @@
+<div class=" glassbox">
+  <div *ngIf="product" class="row g-0" style="">
+    <div class="col-md-7" style="height: 100%;">
+
+      <img style="height: 100%;width: 100%; " src="{{product.imageUrl}}" alt="Trendy Pants and Shoes"
+        class="img-fluid rounded-start" />
+    </div>
+    <div  class="col-md-5">
+      <div   class="row " style="height: 90%;">
+
+        <div class="card-body">
+          <h4 class="card-title">{{product.name}}</h4>
+          <h5 class="card-text ">
+            <span>from</span> {{product.brand}}
+          </h5>
+          <p class="card-text">
+            <small>{{product.description}}</small>
+          </p>
+          <br>
+
+          <ul>
+
+            <li class="card-text">
+              {{product.type}}
+            </li>
+            <li class="card-text">
+              {{product.material}}
+            </li>
+
+            <li class="card-text">
+              {{product.size}}
+            </li>
+          </ul>
+
+          <p class="text-danger"><strong>
+              <del>{{product.marketPrice}}
+              </del>
+            </strong></p>
+          <p class="text-success"><strong>
+              {{product.salePrice}}
+            </strong></p>
+
+        </div>
+      </div>
+
+      <div class="container-fluid">
+
+        <div class="row d-flex justify-content-center">
+
+
+          <div class="col-md-5">
+
+            <button class="btn btn-success btn-sm"><i class="fas fa-shopping-cart"></i> To Shop</button>
+
+          </div>
+
+          <div class="col-md-5">
+
+            <button class="btn btn-warning btn-sm"><i class="fas fa-info-circle"></i><span style="font-size: smaller;">
+                more info</span></button>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div *ngIf="!product" class="row g-0 text-center align-items-center" style="">
+    <h1>لطفا یک فرش انتخاب کنید</h1>
+  </div>
+</div>

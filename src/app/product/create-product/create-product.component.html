@@ -1,0 +1,137 @@
+<div class="container" style="height: 100vh">
+    <div class="row scrolly d-flex  g-2"  style="margin-top: 1%;"  >
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <form [formGroup]="createProductForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" formControlName="name" class="form-control">
+                    <span *ngIf="!createProductForm.get('name').valid && createProductForm.get('name').touched"
+                        class="help-block">please enter a valid data</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" formControlName="description" class="form-control">
+                    <span
+                        *ngIf="!createProductForm.get('description').valid && createProductForm.get('description').touched"
+                        class="help-block">please enter a valid data</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="brand">Brand</label>
+                    <input type="text" id="brand" formControlName="brand" class="form-control">
+                    <span *ngIf="!createProductForm.get('brand').valid && createProductForm.get('brand').touched"
+                        class="help-block">please enter a valid data</span>
+                </div>
+
+                <div class="mb-3" style="width: 100%;">
+                    <label for="size">Size</label>
+                    <br>
+                    <select style="width: 100%;height: 35px;" class="" id="size" (change)="changeSize($event)"
+                        formControlName="size">
+                        <option class="dropdown-item" *ngFor="let size of keys(sizes)" [ngValue]="size"
+                            style="text-align: center;font-size: large;">{{size}}</option>
+                    </select>
+                </div>
+
+                <div class="mb-3" style="width: 100%;">
+                    <label for="size">Type</label>
+                    <br>
+                    <select style="width: 100%;height: 35px;" class="" id="type" (change)="changeType($event)"
+                        formControlName="type">
+                        <option class="dropdown-item" *ngFor="let type of keys(types)" [ngValue]="type"
+                            style="text-align: center;font-size: large;">{{type}}</option>
+                    </select>
+                </div>
+
+                <div class="mb-3" style="width: 100%;">
+                    <label for="size">Material</label>
+                    <br>
+                    <select style="width: 100%;height: 35px;" class="" id="material" (change)="changeMaterial($event)"
+                        formControlName="material">
+                        <option class="dropdown-item" *ngFor="let material of keys(materials)" [ngValue]="material"
+                            style="text-align: center;font-size: large;">{{material}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="marketPrice">Market Price</label>
+                    <input type="number" id="marketPrice" formControlName="marketPrice" class="form-control">
+                    <span
+                        *ngIf="!createProductForm.get('marketPrice').valid && createProductForm.get('marketPrice').touched"
+                        class="help-block">please enter a valid data</span>
+                </div>
+                <div class="form-group">
+                    <label for="salePrice">Sale Price</label>
+                    <input type="number" id="salePrice" formControlName="salePrice" class="form-control">
+                    <span
+                        *ngIf="!createProductForm.get('salePrice').valid && createProductForm.get('salePrice').touched"
+                        class="help-block">please enter a valid data</span>
+                </div>
+
+
+
+                <br>
+                <label for="isUpload">
+                    Product Image
+                </label>
+                <br>
+                <div class="btn-group">
+                    <input formControlName="isUpload" mdbRadio type="radio" class="btn-check" name="isUpload" id="url"
+                    
+                    [value]="false"
+                        autocomplete="off" />
+                    <label class="btn btn-secondary" for="url">Url</label>
+
+                    <input formControlName="isUpload" [value]="true" mdbRadio type="radio" class="btn-check" name="isUpload" formControlName="isUpload" id="upload"
+                        autocomplete="off" />
+                    <label class="btn btn-secondary" for="upload">Upload</label>
+
+                </div>
+
+                <div *ngIf="!createProductForm.get('isUpload').value" class="form-group">
+                    <label for="imageUrl">Insert Url</label>
+                    <input type="text" id="imageUrl" formControlName="imageUrl" class="form-control">
+                    <span *ngIf="!createProductForm.get('name').valid && createProductForm.get('name').touched"
+                        class="help-block">please enter a valid data</span>
+                </div>
+
+                <div *ngIf="createProductForm.get('isUpload').value" class="form-group">
+                    <label for="imageUrl">Upload Image</label>
+
+                    <div class="row d-flex g-3">
+                        <div class="d-flex">
+        
+                            <input class="form-control " type="file" (change)="onChangeImage($event)">
+        
+                            <button type="button" (click)="onUploadImage()" class="btn  btn-primary" style="margin-left: 2px;">
+                                Upload
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="container  jumbotron text-success" *ngIf="createProductForm.get('imageUrl').value">
+                        <h6>Image Url :{{createProductForm.get('imageUrl').value}} </h6>
+                    </div>
+         
+                </div>
+
+                <br>
+                <br>
+
+                <button class="btn btn-primary" type="submit" [disabled]="createProductForm.invalid">Priview & Save</button>
+
+                <ul>
+
+                    <li *ngFor="let item of createProductForm.errors">
+                        
+                    </li>
+                </ul>
+
+            </form>
+
+            
+
+        </div>
+    </div>
+</div>

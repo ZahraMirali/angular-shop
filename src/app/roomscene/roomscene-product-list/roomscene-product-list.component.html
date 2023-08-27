@@ -1,0 +1,309 @@
+<div class="d-flex row ">
+
+    <div class="d-flex align-items-center col-md-5 ">
+        <div class="glassbox" style="width: 100%;height: 97%;">
+            <div class="row d-flex" style="height: 100%;">
+
+
+                <div class="col-md-3" style="padding-top: 1%;padding-left: 1%; padding-right: 0;">
+
+                    <div class=" d-flex justify-content-center align-items-center" style="height:20%;">
+
+                        <h5 style="padding: 10%;">Serach & Filter</h5>
+                    </div>
+                    <div style="margin-left: 8%;margin-top: 3%;"
+                        class="col-md-12  d-flex justify-content-start align-items-center"
+                        *ngFor="let item of selectedFields">
+
+                        <ng-template [ngIf]="item.key=='color'">
+
+                            <div class=" badge badge-warning text-dark">
+                                <span class="">{{item.key}} : </span>
+                                <div *ngFor="let value of item.values" class="square"
+                                    [ngStyle]="{'background-color':value}"></div>
+                                <ng-template [ngIf]="item.options.colorCombine">
+                                    <i class="fas fa-link"></i>
+
+                                </ng-template>
+                                &nbsp; <i (click)="nothing()" style="color: red;"
+                                    class=" far fa-times-circle hand "></i>
+
+                                <div style="padding-right: 10px;display: inline;"></div>
+                            </div>
+                        </ng-template>
+                        <ng-template [ngIf]="item.key=='price'">
+
+                            <span class="badge badge-warning text-dark"><ng-template
+                                    [ngIf]="item.options.priceSort=='Ascending'">{{item.key}} : {{item.values[0]}} <i
+                                        class="fas fa-long-arrow-alt-up"></i>
+                                    {{item.values[1]}}</ng-template><ng-template
+                                    [ngIf]="item.options.priceSort=='Descending'">{{item.key}} : {{item.values[1]}} <i
+                                        class="fas fa-long-arrow-alt-down"></i> {{item.values[0]}} </ng-template>&nbsp;
+                                <i (click)="nothing()" style="color: red;"
+                                    class=" far fa-times-circle hand "></i></span>
+
+
+                        </ng-template>
+                        <ng-template [ngIf]="item.key!='color'&&item.key!='price'">
+
+                            <span class="badge badge-warning text-dark">{{item.key}} : {{item.values[0]}} &nbsp; <i
+                                    (click)="nothing()" style="color: red;"
+                                    class=" far fa-times-circle hand "></i></span>
+                        </ng-template>
+
+
+
+
+                    </div>
+
+                </div>
+                <div class="row d-flex col-md-9 justify-content-center" style="height: 100%;padding-right: 0;">
+
+                    <div class="row tab-glassbox" style="height: 21%;">
+                        <div class="d-flex col-md-12 justify-content-around ">
+
+                            <button class="tab-btn btn"
+                                [ngClass]="{'btn-light':selectedTabValue=='name',' btn-outline-light':selectedTabValue!='name'}"
+                                (click)="onSelectedTab('name')">name & brand</button>
+                            <button class="btn  tab-btn"
+                                [ngClass]="{'btn-light':selectedTabValue=='color',' btn-outline-light':selectedTabValue!='color'}"
+                                (click)="onSelectedTab('color')">color</button>
+                            <button class="btn  tab-btn"
+                                [ngClass]="{'btn-light':selectedTabValue=='price',' btn-outline-light':selectedTabValue!='price'}"
+                                (click)="onSelectedTab('price')">price</button>
+                            <div mdbDropdown class="btn-group dropend tab-btn">
+                                <button type="button" class="tab-btn btn btn-outline-light dropdown-toggle"
+                                    mdbDropdownToggle aria-expanded="false">
+                                    Other
+                                </button>
+                                <ul mdbDropdownMenu class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Type</a></li>
+                                    <li><a class="dropdown-item" href="#">Material</a></li>
+                                    <li><a class="dropdown-item" href="#">Size</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row d-flex  filter-glassbox" style="min-height:58% ;height: 58%;">
+
+                        <ng-template [ngIf]="selectedTabValue=='price'">
+
+                            <div></div>
+                            <div class=" align-items-center custom-slider">
+                                <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"
+                                    (userChangeEnd)="onUserChangeEnd($event)"></ngx-slider>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3" style="margin-top: 1%;">
+                                    Price Sort :
+                                </div>
+                                <div class="col-md-6" style="margin-bottom: 0%;">
+
+                                    <div mdbDropdown class="dropdown">
+                                        <a class="btn btn-outline-warning dropdown-toggle" role="button"
+                                            id="dropdownMenuLink" mdbDropdownToggle aria-expanded="false">
+                                            {{priceSort}}
+                                        </a>
+                                        <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item"
+                                                    (click)="onPriceSort('Ascending')">Ascending</a></li>
+                                            <li><a class="dropdown-item"
+                                                    (click)="onPriceSort('Descending')">Descending</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" style="">
+                                    <button class="btn btn-sm btn-danger" style="margin: 2%;margin-top: 3%;"
+                                        (click)="onRemovePrice()">
+                                        <i class="fas fa-times"></i></button>
+                                    <button class=" btn btn-sm btn-success " style="margin: 2%;margin-top: 3%;"
+                                        (click)="onPriceConfirm()"><i class="fas fa-check"></i></button>
+                                </div>
+                            </div>
+
+                        </ng-template>
+                        <ng-template [ngIf]="selectedTabValue=='color'">
+                            <div>
+                                <div class="row d-flex" style="margin-top: 1.5% ;margin-bottom: 1%;">
+                                    <div class="col-md-3" style="margin-top: 0.8%;">Select Colors:</div>
+
+                                    <div class="d-flex col-md-5 justify-content-start" style="margin-top: 1%;">
+
+                                        <button (click)="deleteSelectedColor(item)"
+                                            [ngStyle]="{'background-color':item}" class="color-selected-btn "
+                                            *ngFor="let item of selectedColors"></button>
+
+
+                                    </div>
+
+
+                                    <div class="d-flex col-md-4 justify-content-end" style="padding-right: 5%;">
+                                        <div style="margin-top: 4% ;margin-right:1% ;padding-bottom: 0;">Combine?</div>
+                                        <div style="margin-top: 5%;margin-right: 2%;margin-left: 1%;padding-bottom: 0;margin-bottom: 0;"
+                                            class="form-check form-switch">
+                                            <input mdbCheckbox class="form-check-input" type="checkbox"
+                                                [(ngModel)]="colorCombine" id="flexSwitchCheckDefault" />
+                                            <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                        </div>
+                                        <button class="color-clear-btn btn btn-sm btn-danger"
+                                            (click)="deleteAllSelectedColors()">
+                                            <i class="fas fa-times"></i></button>
+                                        <button class="color-accept-btn btn btn-sm btn-success "
+                                            (click)="onColorConfirm()"><i class="fas fa-check"></i></button>
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="row"
+                                    style="margin-left: 10%; margin-top: 2%;margin-bottom: 0;margin-right: 10%;">
+
+                                    <div class="col-md-1" *ngFor="let item of colors">
+                                        <button [ngClass]="isColorSelected(item)" [ngStyle]="{'background-color':item}"
+                                            class="color-btn" (click)="onColorSelected(item)"></button>
+                                    </div>
+
+
+
+
+
+
+
+                                </div>
+                            </div>
+
+
+
+                        </ng-template>
+                        <ng-template [ngIf]="selectedTabValue=='name'">
+                            <div class="row" style="margin: 2%;margin-top: 5%;">
+
+                                <div class="col-md-6">
+                                    <mdb-form-control class="form-white">
+                                        <input mdbInput id="form1" class="form-control" type="text" 
+                                        [(ngModel)]="nameInput"
+                                        aria-label="Number"
+                                            matInput [formControl]="nameControl" [matAutocomplete]="auto1">
+                                        <label mdbLabel class="form-label" for="form1">Name</label>
+
+                                        <mat-autocomplete #auto1="matAutocomplete">
+                                            <mat-option *ngFor="let option of nameFilteredOptions | async"
+                                                [value]="option">
+                                                {{option}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mdb-form-control>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <mdb-form-control class="form-white">
+                                        <input mdbInput id="form2" class="form-control" type="text"
+                                        [(ngModel)]="brandInput"
+                                         aria-label="Number"
+                                            matInput [formControl]="brandControl" [matAutocomplete]="auto2">
+                                        <label mdbLabel class="form-label" for="form2">Brand</label>
+
+                                        <mat-autocomplete #auto2="matAutocomplete">
+                                            <mat-option *ngFor="let option of brandFilteredOptions | async"
+                                                [value]="option">
+                                                {{option}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mdb-form-control>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9">
+
+                                </div>
+                                <div class="col-md-3" style="">
+                                    <button class="btn btn-sm btn-danger" style="margin: 2%;margin-top: 3%;"
+                                        (click)="onRemoveName()">
+                                        <i class="fas fa-times"></i></button>
+                                    <button class=" btn btn-sm btn-success " style="margin: 2%;margin-top: 3%;"
+                                        (click)="onNameConfirm()"><i class="fas fa-check"></i></button>
+                                </div>
+                            </div>
+
+
+
+                        </ng-template>
+
+
+                    </div>
+
+
+
+
+                    <div class="align-self-end pagination-glassbox" style=" height: 21%;padding-top: 0.5%;">
+
+
+                        <nav class="align-items-end" aria-label="Page navigation example">
+                            <ul class="d-flex pagination justify-content-center align-items-end"
+                                style="margin-bottom: 0;">
+
+                                <li class="page-item costum-pagination"><button class="page-link text-info"
+                                        (click)="firstProducts()">0</button></li>
+                                <p style="margin-top: 1%;margin-bottom: 0;">...</p>
+
+                                <li class="page-item costum-pagination">
+                                    <button class="page-link text-info" style="height: 100%;"
+                                        (click)="getBackProducts()"><i
+                                            class="fas fa-chevron-left text-warning"></i></button>
+                                </li>
+                                <li class="page-item costum-pagination" *ngFor="let item of products;index as i">
+                                    <button class="page-link text-warning"
+                                        (click)="productSelected(item)">{{i+1+pointer}}</button>
+                                </li>
+
+                                <li class="page-item costum-pagination">
+                                    <button class="page-link text-info" style="height: 100%;"
+                                        (click)="getNextProducts()"><i
+                                            class="fas fa-chevron-right text-warning"></i></button>
+                                </li>
+                                <p style="margin-top: 1%;margin-bottom: 0;">...</p>
+
+                                <li class="page-item costum-pagination"><button class="page-link text-info"
+                                        (click)="endProducts()">{{total}}</button></li>
+
+
+                            </ul>
+                        </nav>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-7" style="">
+
+        <div class="row d-flex align-items-center justify-content-start">
+
+
+            <app-roomscene-product-item class="col-md-2" *ngFor="let item of products;index as i"
+                [product]="item"></app-roomscene-product-item>
+
+        </div>
+
+    </div>
+
+
+
+
+</div>

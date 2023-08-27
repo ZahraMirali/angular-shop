@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Preview</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+</div>
+<div class="modal-body">
+
+  <div class="bs-shadow rounded-4  hover-overlay d-flex align-items-end" mdbRipple rippleColor="light"
+    style="aspect-ratio: 3/2; width: 100%;">
+    <img src="{{templateData.imageUrl}}" class="" style="width: 100%;height: 100%;" alt="Wild Landscape">
+
+    <div class="mask  "
+      style="padding: 5%; background: linear-gradient(0deg, rgba(73,73,73,0) 0%, rgba(59,59,59,0.5298494397759104) 14%, rgba(50,50,50,0.7959558823529411) 51%, rgba(78,78,78,0.7259278711484594) 85%, rgba(83,83,83,0.38139005602240894) 100%);; height: 50%;">
+      <h4 class="text-white ">{{templateData.name}}</h4>
+      <p class="text-white">
+        <span style="font-size: 12px;">{{templateData.description}}</span>
+
+      </p>
+      <br>
+      <a href="#" class=" btn btn-outline-light  btn-sm" style="font-size: xx-small;">Select Template</a>
+
+
+
+    </div>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="modalRef.close()">
+    Close
+  </button>
+  <button type="button" class="btn btn-primary" (click)="onSave()">Save Template</button>
+</div>

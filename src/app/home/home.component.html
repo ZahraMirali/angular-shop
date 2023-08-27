@@ -1,0 +1,25 @@
+<div class="row" style="height: 100%">
+
+    <div class="col align-self-center col-md-6 offset-md-3">
+
+      <div class="row" style=" min-height: 300px;">
+
+        <a [routerLink]="['/template','template-list']" [@box]="state1" (mouseenter)="onMouseOver1()" (mouseleave)="onMouseOut1()" style="cursor: pointer;" class="col col-md-5 height:inherit d-flex align-items-center justify-content-center  bg-text">
+
+          <h3 class="text-center">
+            Select Template
+          </h3>
+        </a>
+        <a [routerLink]="['/template','make-template']" [@box]="state2" (mouseenter)="onMouseOver2()" (mouseleave)="onMouseOut2()"  style="cursor: pointer;" class="  col col-md-5  d-flex align-items-center justify-content-center offset-md-2 bg-text">
+          <h3 class="text-center align-self-center">
+
+            Make Your Tamplate
+
+          </h3>
+        </a>
+
+
+      </div>
+    </div>
+
+  </div>

@@ -1,0 +1,70 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+</div>
+<div class="row d-flex justify-content-center modal-body">
+
+  <div class="glassbox" style="width: 700px">
+    <div class="row g-0" style="height:62vh">
+      <div class="col-md-7" style="height: 100%;">
+
+        <canvas #canvas   id="canvas"
+        
+        [ngStyle]="{'background-image': 'url(' +appliedImageUrl+ ')' , 'background-repeat':'no-repeat', 'height':'
+        100%' ,'background-size': '100% 100%'}" style="cursor:crosshair"  alt="Trendy Pants and Shoes"
+          class="img-fluid rounded-start"  (click)="getPosition($event)" ></canvas>
+      </div>
+      <div class="col-md-5">
+        <div class="card-body">
+          <h4 class="card-title">{{form.get('name').value}}</h4>
+          <h5 class="card-text ">
+            {{form.get('brand').value}}
+          </h5>
+          <p class="card-text">
+            <small>{{form.get('description').value}}</small>
+          </p>
+          <br>
+
+          <ul>
+
+            <li class="card-text">
+              {{form.get('type').value}}
+            </li>
+            <li class="card-text ">
+              {{form.get('material').value}}
+            </li>
+
+            <li class="card-text">
+              {{form.get('size').value}}
+            </li>
+          </ul>
+
+          <p class="text-danger"><strong>
+            <del>{{form.get('marketPrice').value}} Rial
+            </del>
+          </strong></p>
+          <p class="text-success"><strong>
+          {{form.get('salePrice').value}} Rial
+          </strong></p>
+
+
+
+
+
+        </div>
+        <div class="card-footer text-muted">2 days ago</div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="modal-footer" style="justify-content: center;">
+
+
+  <button type="button" class="btn btn-warning" (click)="onSave()"><i class="fas fa-undo"></i></button>
+  <button type="button" class="btn btn-warning" (click)="onSave()"><i class="fas fa-redo"></i></button>
+  <button type="button" class="btn btn-danger" (click)="onSave()">Clear</button>
+  <button type="button" class="btn btn-primary" (click)="applyImage()">Apply Image</button>
+  <button type="button" class="btn btn-success" (click)="onSave()">Save</button>
+</div>
